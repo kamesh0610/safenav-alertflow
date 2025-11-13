@@ -2,9 +2,9 @@ import { AccidentAlert, AccidentSeverity } from '@/types/accident';
 
 // Generate random coordinates within a reasonable highway area
 const generateRandomLocation = () => {
-  // Simulating a highway area (example: area around a major highway)
-  const baseLat = 28.6139; // Example: Delhi, India
-  const baseLng = 77.2090;
+  // Simulating a highway area (Tamil Nadu region)
+  const baseLat = 11.1271; // Tamil Nadu, India
+  const baseLng = 78.6569;
   const variance = 0.5; // About 55km radius
   
   return {
@@ -38,6 +38,6 @@ export const generateAccidentAlert = (): AccidentAlert => {
 };
 
 export const getRandomInterval = () => {
-  // Random interval between 5 and 20 seconds
-  return Math.floor(Math.random() * 15000) + 5000;
+  // Fixed interval of 1 minute
+  return 60000;
 };
