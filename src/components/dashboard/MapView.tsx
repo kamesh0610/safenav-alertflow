@@ -15,8 +15,8 @@ const MapView = ({ alerts }: MapViewProps) => {
   useEffect(() => {
     if (!mapContainerRef.current || mapRef.current) return;
 
-    // Initialize map
-    mapRef.current = L.map(mapContainerRef.current).setView([28.6139, 77.2090], 11);
+    // Initialize map centered on Tamil Nadu
+    mapRef.current = L.map(mapContainerRef.current).setView([11.1271, 78.6569], 9);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
