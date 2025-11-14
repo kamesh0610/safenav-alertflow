@@ -78,9 +78,9 @@ const FutureScope = () => {
   ];
 
   return (
-    <div className="mt-8">
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-3">
+    <section className="mt-8">
+      <header className="mb-8 bg-gradient-to-r from-primary/10 via-purple-500/10 to-pink-500/10 p-8 rounded-2xl border border-primary/20">
+        <div className="flex items-center gap-3 mb-4">
           <Badge className="bg-gradient-to-r from-primary to-purple-500 text-white px-3 py-1">
             <Zap className="w-3 h-3 mr-1" />
             Future Technology
@@ -91,7 +91,7 @@ const FutureScope = () => {
           The next generation of SafeRide will leverage cutting-edge AI, IoT sensors, computer vision, and 5G connectivity 
           to create a fully autonomous emergency response ecosystem with sub-second detection and response capabilities.
         </p>
-      </div>
+      </header>
 
       {/* Primary Features - Large Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
@@ -197,24 +197,7 @@ const FutureScope = () => {
           </div>
         </div>
       </Card>
-
-      {/* Technology Stack Preview */}
-      <Card className="mt-6 p-6 bg-muted/30">
-        <h3 className="font-semibold mb-4 flex items-center gap-2">
-          <Zap className="w-5 h-5 text-yellow-500" />
-          Planned Technology Stack
-        </h3>
-        <div className="flex flex-wrap gap-2">
-          {['TensorFlow', 'PyTorch', 'OpenCV', 'YOLO v8', 'MQTT Protocol', '5G Networks', 
-            'Edge TPU', 'AWS IoT Core', 'Real-time Databases', 'WebRTC', 'Arduino/ESP32', 
-            'React Native'].map((tech) => (
-            <Badge key={tech} variant="outline" className="text-xs">
-              {tech}
-            </Badge>
-          ))}
-        </div>
-      </Card>
-    </div>
+    </section>
   );
 };
 
