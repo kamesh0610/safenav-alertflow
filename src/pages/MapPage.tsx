@@ -1,29 +1,10 @@
-import { useEffect, useState } from 'react';
-import { AccidentAlert } from '@/types/accident';
-import { generateAccidentAlert, getRandomInterval } from '@/utils/accidentGenerator';
 import { PageHeader } from '@/components/PageHeader';
 import MapView from '@/components/dashboard/MapView';
 import { Map } from 'lucide-react';
-import { toast } from 'sonner';
+import { useAlerts } from '@/contexts/AlertContext';
 
 const MapPage = () => {
-  const [alerts, setAlerts] = useState<AccidentAlert[]>([]);
-
-  useEffect(() => {
-    const generateAlert = () => {
-      const newAlert = generateAccidentAlert();
-      setAlerts((prev) => [newAlert, ...prev]);
-      
-      toast.error('🚨 New Accident Detected!', {
-        description: `${newAlert.severity} severity at Vehicle ${newAlert.vehicleId}`,
-      });
-    };
-
-    generateAlert();
-    const interval = setInterval(generateAlert, getRandomInterval());
-
-    return () => clearInterval(interval);
-  }, []);
+  const { alerts } = useAlerts();
 
   return (
     <div className="min-h-screen bg-background">

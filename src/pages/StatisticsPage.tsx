@@ -1,33 +1,11 @@
-import { useEffect, useState } from 'react';
-import { AccidentAlert } from '@/types/accident';
-import { generateAccidentAlert, getRandomInterval } from '@/utils/accidentGenerator';
 import { PageHeader } from '@/components/PageHeader';
 import StatsPanel from '@/components/dashboard/StatsPanel';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart3, TrendingUp, Clock, MapPin } from 'lucide-react';
-import { toast } from 'sonner';
+import { useAlerts } from '@/contexts/AlertContext';
 
 const StatisticsPage = () => {
-  const [alerts, setAlerts] = useState<AccidentAlert[]>([]);
-
-  useEffect(() => {
-    const generateAlert = () => {
-      const newAlert = generateAccidentAlert();
-      setAlerts((prev) => [newAlert, ...prev]);
-      
-      toast.error('🚨 New Accident Detected!', {
-        description: `${newAlert.severity} severity at Vehicle ${newAlert.vehicleId}`,
-      });
-    };
-
-    generateAlert();
-    const interval = setInterval(generateAlert, getRandomInterval());
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const activeAlerts = alerts.filter((a) => a.status === 'Active').length;
-  const resolvedAlerts = alerts.filter((a) => a.status === 'Resolved').length;
+  const { alerts, activeAlerts, resolvedAlerts } = useAlerts();
   const highSeverity = alerts.filter((a) => a.severity === 'High').length;
   const mediumSeverity = alerts.filter((a) => a.severity === 'Medium').length;
   const lowSeverity = alerts.filter((a) => a.severity === 'Low').length;
