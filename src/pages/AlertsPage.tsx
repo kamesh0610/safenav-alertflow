@@ -1,42 +1,12 @@
-import { useEffect, useState } from 'react';
-import { AccidentAlert } from '@/types/accident';
-import { generateAccidentAlert, getRandomInterval } from '@/utils/accidentGenerator';
 import { PageHeader } from '@/components/PageHeader';
 import AlertCard from '@/components/dashboard/AlertCard';
 import { AlertCircle } from 'lucide-react';
-import { toast } from 'sonner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useAlerts } from '@/contexts/AlertContext';
 
 const AlertsPage = () => {
-  const [alerts, setAlerts] = useState<AccidentAlert[]>([]);
-
-  useEffect(() => {
-    const generateAlert = () => {
-      const newAlert = generateAccidentAlert();
-      setAlerts((prev) => [newAlert, ...prev]);
-      
-      toast.error('🚨 New Accident Detected!', {
-        description: `${newAlert.severity} severity at Vehicle ${newAlert.vehicleId}`,
-      });
-    };
-
-    generateAlert();
-    const interval = setInterval(generateAlert, getRandomInterval());
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleResolve = (id: string) => {
-    setAlerts((prev) =>
-      prev.map((alert) =>
-        alert.id === id ? { ...alert, status: 'Resolved' as const } : alert
-      )
-    );
-    toast.success('✅ Alert Resolved', {
-      description: 'Emergency services have been notified',
-    });
-  };
-
+  const { alerts, handleResolve } = useAlerts();
+  
   const activeAlerts = alerts.filter((a) => a.status === 'Active');
   const resolvedAlerts = alerts.filter((a) => a.status === 'Resolved');
 
